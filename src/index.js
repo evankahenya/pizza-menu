@@ -52,8 +52,6 @@ const pizzaData = [
 
 function App (){
     return <div className="container"> 
-    
-    
     <Header/>
     <Menu/>
     <Footer/>
@@ -66,6 +64,7 @@ function App (){
 // This is how we render in react version 18
 // basically create a connection from index.html to to my app
 const root = ReactDom.createRoot(document.getElementById("root"));
+
 // we use strict mode to render twice to find bugs, for better debugging and checking if we are using outdated parts of the react API
 root.render(<React.StrictMode>
     <App/>
@@ -82,14 +81,47 @@ function Header(){
 
 function Menu(){
     return <div>
-        <h2> Our Menu</h2>
-        <Pizza/>
-        <Pizza/>
-        <Pizza />
+        <h2> Our Menu</h2> 
+        <ul className="pizzas">
+         {pizzaData.map(pizza => <Pizza pizzaObj={pizza} key={pizza.name}/>)}
+        </ul>
+         
+        
+
     
+
+        {/* <Pizza 
+        name = "Pizza Spinaci" 
+        photo="pizzas/spinaci.jpg" 
+        alt="Pizza spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese" 
+        price={10}/>
+      
+      <Pizza 
+      name = "Pizza Funghi" 
+      photoName="pizzas/funghi.jpg" 
+      alt="Pizza spinaci" 
+      ingredients="Tomato, mozarella, mushrooms, and onion" 
+      price={12}/> */}
 
     </div>
 }
+
+function Pizza(props){
+    return (
+    <li className="pizza">
+        <div>
+          <img src= {props.pizzaObj.photoName} alt="Pizza spinaci"></img>
+            <h2 > {props.pizzaObj.name} </h2>
+            <p>{props.pizzaObj.ingredients}</p>
+            <span>{props.pizzaObj.price}</span>
+        </div>
+    </li>);
+
+}
+
+
+
 
 function Footer(){
     // return React.createElement("footer",null, "We are open")
@@ -105,14 +137,6 @@ function Footer(){
       
         {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} {message}
     </footer>
-
-}
-function Pizza(){
-    return <div>
-        <img src="pizzas/spinaci.jpg" alt="Pizza spinaci"></img>
-            <h2 > Pizza Spinaci</h2>
-            <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </div>
 
 }
 
